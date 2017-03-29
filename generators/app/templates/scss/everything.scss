@@ -1,0 +1,13 @@
+@charset 'utf-8';
+
+// --------------------------
+// Import <%- name %> brand framework
+// --------------------------
+
+@import '<%- name %>';
+
+// ------------------
+// Include everything
+// ------------------
+
+@include <%- name %>-everything;

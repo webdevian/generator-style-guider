@@ -1,0 +1,36 @@
+
+mixin docs_select(name, title, id, description, options, selected)
+  label(for=id)= title
+  if description
+    span= description
+  select(name=name, id=id)
+    each option in options
+      option(value = option, selected=(option === selected))= camelToTitle(option)
+
+mixin docs_radio(name, title, id, description, options, selected)
+  fieldset
+    legend= title
+    if description
+      span= description
+    each option in options
+      input(type='radio', name=name, id=id + '-' + option, checked=(option === selected), value=option)
+      label(for=id + '-' + option)= camelToTitle(option)
+
+mixin docs_json(name, title, id, description)
+  label(for=id)= title
+  if description
+    span= description
+  textarea(id=id, name=name)
+    block
+
+mixin docs_text(name, title, id, description, value)
+  label(for=id)= title
+  if description
+    span= description
+  input(type='text', id=id, name=name, value=value)
+
+mixin docs_number(name, title, id, description, value, max, min, step)
+  label(for=id)= title
+  if description
+    span= description
+  input(type='number', id=id, name=name, value=value, max=max, min=min, step=step)

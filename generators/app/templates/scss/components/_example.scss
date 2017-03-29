@@ -1,0 +1,102 @@
+@mixin <%- name %>-example {
+
+  main,
+  .contain,
+  .row {
+    @include grid-row();
+    clear: both;
+  }
+
+  .nest {
+    @include grid-row-nest();
+    clear: both;
+  }
+
+  @include foundation-global-styles;
+
+  @include foundation-forms;
+
+  %helper-text {
+    // Input hint or example
+    display: block;
+    margin-top: -1.6rem;
+    margin-bottom: 1.6rem;
+    color: $medium-gray;
+    font-size: rem-calc(12);
+    font-style: italic;
+  }
+
+  input,
+  textarea,
+  select,
+  label,
+  legend,
+  fieldset {
+    + span,
+    + span + span  {
+      @extend %helper-text;
+    }
+  }
+
+  [for] {
+    cursor: pointer;
+  }
+
+  label + span,
+  legend + span {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+
+  .has-error {
+    input,
+    textarea,
+    select {
+      border-color: $alert-color;
+    }
+
+    label,
+    legend,
+    .error-message {
+      color: $alert-color;
+    }
+
+    [type=file] + label {
+      color: $white;
+    }
+
+    [type='checkbox'],
+    [type='radio'] {
+      + label {
+        color: $black;
+      }
+    }
+
+    .error-message {
+      font-style: normal;
+      font-weight: bold;
+    }
+  }
+
+  [type='text'],
+  [type='password'],
+  [type='date'],
+  [type='datetime'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='week'],
+  [type='email'],
+  [type='number'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='url'],
+  [type='color'],
+  select,
+  textarea,
+  .input-group {
+    max-width: rem-calc(700);
+    margin-bottom: 1.6rem;
+  }
+}

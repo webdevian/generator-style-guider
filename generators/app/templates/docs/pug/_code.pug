@@ -1,0 +1,19 @@
+mixin code(component)
+  span.button.show-code(data-open-component=component) Show Code and Live Preview
+  .code(data-pug, data-component=component)&attributes(attributes)
+    .pug
+      h4 Pug Mixin
+      p.mixin-call
+      h5 Parameters
+      form(action='#')
+      .blockField
+        h5 Block content
+
+    .html
+      h5 Mixin Call
+      code.mixin.block.typescript
+      h5 HTML Output
+      code.output.block.xml
+    .result
+      h5 Live Preview
+      .stage

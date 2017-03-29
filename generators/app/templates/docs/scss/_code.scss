@@ -1,0 +1,91 @@
+code {
+  border-radius: rem-calc(2);
+  font-size: .875rem;
+}
+
+$lighter-blue: #c9cfde;
+$lighter-gray: #bfbfbf;
+
+.show-code {
+  display: inline-block;
+  padding: rem-calc(6 12);
+  background: $medium-gray;
+  font-family: $font-family-monospace;
+
+  &:hover,
+  &:focus,
+  &.open {
+    background: $light-gray;
+  }
+
+  &.open {
+    margin-bottom: 0;
+
+    + .code {
+      display: block;
+    }
+  }
+}
+
+.mixin-call {
+  font-family: $code-font-family;
+}
+
+.code {
+  @include grid-row();
+  display: none;
+  margin-bottom: 1.6rem;
+  padding-top: rem-calc(16);
+  padding-bottom: rem-calc(16);
+  border-width: 1px;
+  border-style: solid;
+  border-color: $lighter-gray;
+
+  code + * {
+    margin-top: rem-calc(16);
+  }
+
+  .pug {
+    @include grid-columns(5);
+  }
+
+  .html {
+    @include grid-columns(7);
+
+    .result {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    .stage {
+      padding: rem-calc(16 16);
+    }
+  }
+
+  .result {
+    @include grid-columns(12);
+  }
+
+  .stage {
+    padding: rem-calc(8 12);
+    border: 3px dashed $lighter-blue;
+  }
+
+  .block {
+    display: block;
+    margin-bottom: rem-calc(16);
+    white-space: pre-wrap;
+    overflow-x: scroll;
+
+    &.output {
+      white-space: pre;
+    }
+  }
+}
+
+// No point showing code if JS is disabled
+.no-js {
+  .show-code {
+    display: none;
+  }
+}

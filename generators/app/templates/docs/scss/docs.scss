@@ -1,0 +1,25 @@
+@charset 'utf-8';
+
+// --------------------------
+// Import <%- longName %> framework
+// --------------------------
+@import '../../scss/<%- name %>';
+
+// ------------------
+// Overwrite settings
+// ------------------
+
+$img-path: '../../img/';
+
+// ------------------
+// Include everything from <%- longName %> framework
+// ------------------
+
+@include <%- name %>-everything;
+
+// ------------------------
+// Docs specific Components
+// ------------------------
+
+@import 'code';
+@import 'gist';

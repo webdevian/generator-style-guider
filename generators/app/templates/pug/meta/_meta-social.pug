@@ -1,0 +1,33 @@
+mixin meta-social(url, title, image, description, siteName)
+
+  //- General
+  title= title
+  meta(name='description', content=description)
+  link(rel='canonical', href=url)
+
+  //- Facebook
+  meta(property='og:url', content=url)
+  meta(property='og:type', content='website')
+  meta(property='og:title', content=title)
+  if image
+    meta(property='og:image', content=image)
+  meta(property='og:description', content=description)
+  meta(property='og:site_name', content=siteName || 'APC Overnight')
+  meta(property='og:locale', content='en_GB')
+
+  //- Twitter
+  meta(property='twitter:url', content=url)
+  meta(property='twitter:site', content='@APCOvernight')
+  meta(property='twitter:card', content='summary')
+  meta(property='twitter:title', content=title)
+  meta(property='twitter:description', content=description)
+  if image
+    meta(property='twitter:image', content=image)
+
+  //- Google
+  meta(itemprop='name', content=title)
+  meta(itemprop='description', content=description)
+  if image
+    meta(itemprop='image', content=image)
+
+  block

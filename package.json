@@ -1,0 +1,52 @@
+{
+  "name": "generator-style-guider",
+  "version": "0.1.1",
+  "description": "Generate digital style guides for your organisation or project with a re-usable css and js framework",
+  "homepage": "https://github.com/webdevian/generator-style-guider",
+  "author": {
+    "name": "Ian Egner",
+    "email": "@ianegner",
+    "url": ""
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/index.js",
+  "keywords": [
+    "style guide",
+    "style",
+    "css",
+    "framework",
+    "js",
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "path": "^0.12.7",
+    "slugify": "^1.1.0",
+    "yeoman-generator": "^1.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-coveralls": "^0.1.0",
+    "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-istanbul": "^1.0.0",
+    "gulp-line-ending-corrector": "^1.0.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-nsp": "^2.1.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-standard": "^9.0.0",
+    "standard": "^9.0.2",
+    "yeoman-assert": "^3.0.0",
+    "yeoman-test": "^1.6.0"
+  },
+  "standard": {
+    "globals": []
+  },
+  "repository": "webdevian/generator-style-guider",
+  "scripts": {
+    "prepublish": "gulp prepublish",
+    "test": "gulp"
+  },
+  "license": "MIT"
+}

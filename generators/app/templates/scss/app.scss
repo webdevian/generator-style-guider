@@ -1,0 +1,27 @@
+@charset 'utf-8';
+
+// ---------------------------
+// Import variables and mixins
+// ---------------------------
+
+@import 'settings';
+@import 'foundation';
+@import 'mixins';
+
+// ---------------------
+// Components
+// ---------------------
+
+@import 'components/example';
+
+
+// ------------------------------------
+// Optional mixin to include everything
+// from the <%- name %> brand framework
+// ------------------------------------
+
+@mixin <%- name %>-everything {
+
+  // Components - Optional
+  @include <%- name %>-example;
+}

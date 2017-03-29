@@ -1,0 +1,172 @@
+%clearfix {
+  &::after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+}
+
+@mixin rprop($prop, $phone: '', $tablet: '', $desktop: null) {
+  #{$prop}: $phone;
+  @include breakpoint(medium) {#{$prop}: $tablet;}
+
+  @if $desktop != null {
+    @include breakpoint(large) {#{$prop}: $desktop;}
+
+  }
+}
+
+@mixin rprop-x($prop, $small-value: null, $medium-value: null, $large-value: null, $xlarge-value: null, $xxlarge-value: null) {
+  @if $small-value != null {
+    #{$prop}: $small-value;
+  }
+  @if $medium-value != null {
+    @include breakpoint(medium) {
+      #{$prop}: $medium-value;
+    }
+  }
+  @if $large-value != null {
+    @include breakpoint(large) {
+      #{$prop}: $large-value;
+    }
+  }
+  @if $xlarge-value != null {
+    @media #{$xlarge-up} {
+      #{$prop}: $xlarge-value;
+    }
+  }
+  @if $xxlarge-value != null {
+    @media #{$xxlarge-up} {
+      #{$prop}: $xxlarge-value;
+    }
+  }
+}
+
+@mixin small-prop($prop, $value: '') {
+  @media #{$small-only} {#{$prop}: $value;}
+}
+
+@mixin medium-prop($prop, $value: '') {
+  @media #{$medium-only} {#{$prop}: $value;}
+}
+
+@mixin large-prop($prop, $value: '') {
+  @media #{$large-only} {#{$prop}: $value;}
+}
+
+@mixin xlarge-prop($prop, $value: '') {
+  @media #{$xlarge-only} {#{$prop}: $value;}
+}
+
+@mixin xxlarge-prop($prop, $value: '') {
+  @media #{$xxlarge-only} {#{$prop}: $value;}
+}
+
+// Make a responsive column element, with width and padding values for each breakpoint
+@mixin grid-columns(
+  // {Integer} Small columns (i.e 6 = half (6/12))
+  $small: $grid-column-count,
+
+  // {Integer} Medium columns
+  $medium: false,
+
+  // {Integer} Large columns
+  $large: false,
+
+  // {Boolean} Clear left if this column is the "first in the row"
+  // i.e, if we have n columns per row, every nth column with have
+  // clear:left to stop elements of different heights breaking the row
+  $clear: false,
+
+  // {Boolean} include left padding
+  $left-padding: true,
+
+  // {Boolean} include right padding
+  $right-padding: true
+){
+
+  width: percentage($small / $grid-column-count);
+  float: left;
+
+  @if($clear) {
+    $n: floor(12 / $small);
+
+    $only: '';
+    @if($medium) {
+      $only: 'only';
+    }
+
+    @if($n > 1) {
+      @include breakpoint(small #{$only}) {
+        &:nth-child(#{$n}n-#{$n - 1}) {
+          clear: left;
+        }
+      }
+    }
+  }
+
+  $padding: rem-calc(map-get($grid-column-gutter, 'small')) / 2;
+  @if($right-padding) {
+    padding-right: $padding;
+  }
+  @if($left-padding) {
+    padding-left: $padding;
+  }
+
+  @include breakpoint(medium) {
+    @if($medium) {
+      width: percentage($medium / $grid-column-count);
+    }
+
+    $medium-padding: rem-calc(map-get($grid-column-gutter, 'medium')) / 2;
+    @if($right-padding) {
+      padding-right: $medium-padding;
+    }
+    @if($left-padding) {
+      padding-left: $medium-padding;
+    }
+  }
+
+  @if($clear and $medium) {
+    $n: floor(12 / $medium);
+
+    $only: '';
+    @if($medium) {
+      $only: 'only';
+    }
+
+    @if($n > 1) {
+      @include breakpoint(medium #{$only}) {
+        &:nth-child(#{$n}n-#{$n - 1}) {
+          clear: left;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(large) {
+    @if($large) {
+      width: percentage($large / $grid-column-count);
+    }
+
+    $large-padding: rem-calc(map-get($grid-column-gutter, 'large')) / 2;
+    @if($right-padding) {
+      padding-right: $large-padding;
+    }
+    @if($left-padding) {
+      padding-left: $large-padding;
+    }
+  }
+
+  @if($clear and $large) {
+    $n: floor(12 / $large);
+
+    @if($n > 1) {
+      @include breakpoint(large) {
+        &:nth-child(#{$n}n-#{$n - 1}) {
+          clear: left;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+
+.DS_Store
+node_modules
+npm-debug.log
+
+# Generated docs css and js
+docs/css/docs.css
+docs/js/scripts.js
+
+# Generated docs markup
+index.html
+
+### You may want to exclude the compiled CSS and JS
+### from version control. If so uncomment the line below
+# dist

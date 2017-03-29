@@ -1,0 +1,11 @@
+mixin example(type, name, value, id, label, helperBelow, helperAbove, error)
+  div(class=error ? 'has-error' : '')
+    label(for=id)= label
+    if helperAbove
+      span= helperAbove
+    input(type=type, id=id, name=name, value=value)&attributes(attributes)
+    if helperBelow
+      span= helperBelow
+    block
+    if error
+      span.error-message= error

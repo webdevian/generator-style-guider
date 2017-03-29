@@ -1,0 +1,105 @@
+include ../../pug/_mixins.pug
+include _code.pug
+- var cachebuster = Math.random().toString(36).substring(2, 9)
+
+doctype html
+html.no-js(lang='en')
+  head
+
+    if meta && meta.basic
+      +meta-basic
+    if meta && meta.social
+      +meta-social(meta.social.url, meta.social.title || meta.title, meta.social.image, meta.social.description, meta.social.siteName)
+
+    if options && options.noJs
+      script.
+        (function(H) {
+          H.className = H.className.replace(/\bno-js\b/, 'js');
+        })(document.documentElement);
+
+    link(rel='stylesheet', href='docs/css/docs.css?=' + cachebuster)
+    script.
+      var components = !{JSON.stringify(components)}
+  body
+    if options && options.skipLink
+      +skip-link
+    if options && options.noScript
+      +noscript
+
+    main#content
+
+      h3 Menu
+      ul(role='navigation')
+        each item in menuLinks
+          - var classes = ''
+          - classes = classes + (item.children ? 'has-dropdown' : '')
+          - classes = classes + (item.active ? ' active' : '')
+          li(class=classes)
+            a(href=item.link ? item.link : '#', tabindex=0)= item.label
+            if item.children
+              ul(role='menu')
+                each child in item.children
+                  li(class=child.active ? 'active' : null)
+                    a(href=child.link, role='menuitem')= child.label
+
+      .full
+        h1#root #{meta.title} #[small= version]
+
+        if introduction
+          each paragraph in introduction
+            p!= paragraph
+
+        hr
+
+        if components && menu
+          each menuComponent, i in Object.keys(menu)
+            if i !== 0
+              hr
+            .component
+              - var component = components[menuComponent]
+              h2(id=component.name)= component.title
+              if component.docs
+                each paragraph in component.docs
+                  p!= paragraph
+
+              if component.demo
+                if component.breakout
+                  .breakout
+                    != component.demo
+                else
+                  != component.demo
+
+              if component.params
+                +code(component.name)
+
+            if menuComponent.length
+              each child, j in menu[menuComponent]
+                if j !== 0
+                  hr
+                .component
+                  - var component = components[child]
+                  h3(id=component.name)= component.title
+                  if component.docs
+                    each paragraph in component.docs
+                      p!= paragraph
+
+                  if component.demo
+                    if component.breakout
+                      .breakout
+                        != component.demo
+                    else
+                      != component.demo
+
+                  if component.params
+                    +code(component.name)
+
+        else
+          h2 There are no components
+
+    script(src='docs/js/jquery.js')
+    script(src='docs/js/jquery-ui.js')
+    script(src='docs/js/scripts.js?=' + cachebuster)
+
+    script(src='docs/js/pug.js')
+    script(src='docs/js/highlight.min.js')
+    script(src='docs/js/docs.js')
