@@ -1,5 +1,12 @@
-# generator-style-guider [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> Generate digital style guides for your organisation or project with a re-usable css and js framework
+# Style Guider [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage][coveralls-image]][coveralls-url]
+> Generate a re-usable web framework, with a digital style guide, for your organisation or project
+
+## Features
+
+* Build a CSS, Javascript and Pug framework to be re-used across multiple projects.
+* Generate a Style Guide / Documentation for your framework, with live interactive previews of each component.
+* Built-in linting
+* Use NPM or Yarn to manage dependencies.
 
 ## Installation
 
@@ -16,16 +23,15 @@ Then generate your new project:
 yo style-guider
 ```
 
-## Getting To Know Yeoman
+### Adding components
 
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
-
+Add new components for your style guide:
+```bash
+yo style-guider:component
+```
 ## License
 
-MIT © [Ian Egner]()
+MIT © Ian Egner
 
 
 [npm-image]: https://badge.fury.io/js/generator-style-guider.svg
