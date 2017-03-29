@@ -23,7 +23,7 @@ gulp.task('sass-lint', function (cb) {
     if (stdout) {
       gutil.log(stdout)
     }
-    cb(process.argv.length > 2 ? err : 0)
+    cb(0)
   })
 })
 
@@ -34,7 +34,7 @@ gulp.task('js-lint', function () {
   return gulp.src([ 'js/**/*.js', 'schema/**/*.js', 'gulpfile.js', '!js/vendor/**' ])
   .pipe(standard())
   .pipe(standard.reporter('default', {
-    breakOnError: process.argv.length > 2,
+    breakOnError: false,
     quiet: true
   }))
 })
@@ -45,7 +45,7 @@ gulp.task('js-lint', function () {
 gulp.task('pug-lint', function () {
   return gulp.src([ '**/*.pug' ])
     .pipe(pugLinter())
-    .pipe(pugLinter.reporter(process.argv.length > 2 ? 'fail' : null))
+    .pipe(pugLinter.reporter(null))
 })
 
 /**
