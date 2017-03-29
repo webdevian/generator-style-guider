@@ -47,19 +47,11 @@ module.exports = class extends Generator {
       props.npm = props.depManager === 'npm'
 
       this.props = props
-      this.config.save()
+      this.config.set(props)
     })
   }
 
   default () {
-    if (path.basename(this.destinationPath()) !== this.props.name) {
-      this.log(
-        'Your generator must be inside a folder named ' + this.props.name + '\n' +
-        'I\'ll automatically create this folder.'
-      )
-      mkdirp(this.props.name)
-      this.destinationRoot(this.destinationPath(this.props.name))
-    }
   }
 
   writing () {

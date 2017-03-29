@@ -1,0 +1,7 @@
+// Style for <%- longName %> component
+
+@mixin <%- projectName %>-<%- name %> {
+  .<%- name %> {
+    font-size: 100%;
+  }
+}

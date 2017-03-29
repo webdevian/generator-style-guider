@@ -58,6 +58,8 @@ module.exports = {
    * select all have a schema in schema/components
    */
   menu: {
+    // NB! The below line is required for our yeoman generator and should not be changed.
+    // ------ yeoman include hook ------ //
     example: []
   }
 }

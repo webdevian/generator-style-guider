@@ -14,6 +14,8 @@
 
 @import 'components/example';
 
+//------ yeoman import hook ------ //
+//- NB! The above line is required for our yeoman generator and should not be changed.
 
 // ------------------------------------
 // Optional mixin to include everything
@@ -24,4 +26,7 @@
 
   // Components - Optional
   @include <%- name %>-example;
+
+  //------ yeoman include hook ------ //
+  //- NB! The above line is required for our yeoman generator and should not be changed.
 }
