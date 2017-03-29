@@ -41,7 +41,11 @@
     "yeoman-test": "^1.6.0"
   },
   "standard": {
-    "globals": []
+    "globals": [],
+    "env" : {
+      "node" : true,
+      "mocha" : true
+    }
   },
   "repository": "webdevian/generator-style-guider",
   "scripts": {

@@ -124,9 +124,11 @@ module.exports = class extends Generator {
       this.spawnCommandSync('git', ['init', '--quiet'])
     }
     if (this.props.yarn) {
-      this.yarnInstall(null, null, () => this.spawnCommandSync('yarn', ['run', 'build']))
+      this.spawnCommandSync('yarn', ['install'])
+      this.spawnCommandSync('yarn', ['run', 'build'])
     } else {
-      this.npmInstall(null, null, () => this.spawnCommandSync('npm', ['run', 'build']))
+      this.spawnCommandSync('npm', ['install', '--silent'])
+      this.spawnCommandSync('npm', ['run', '--silent', 'build'])
     }
   }
 }
