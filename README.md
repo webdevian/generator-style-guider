@@ -1,4 +1,5 @@
-# Style Guider [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage][coveralls-image]][coveralls-url]
+# Style Guider
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage][coveralls-image]][coveralls-url] [![Code Climate](https://codeclimate.com/github/webdevian/generator-style-guider/badges/gpa.svg)](https://codeclimate.com/github/webdevian/generator-style-guider)
 > Generate a re-usable web framework, with a digital style guide, for your organisation or project
 
 ## Features
