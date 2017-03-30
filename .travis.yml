@@ -3,5 +3,8 @@ node_js:
   - v7
   - v6
 before_script:
-  #install yarn globally
-   - npm install -g yarn
+  # install yarn and codeclimate-test-reporter globally
+  - npm install -g yarn codeclimate-test-reporter
+after_script:
+  # pass coverage to codeclimate
+  - codeclimate-test-reporter < coverage/lcov.info
