@@ -10,7 +10,8 @@ describe('generator-style-guider:app - npm', () => {
     return helpers.run(path.join(__dirname, '../generators/app'))
       .withPrompts({
         name: 'my-styles',
-        depManager: 'npm'
+        depManager: 'npm',
+        husky: true
       })
   })
 
@@ -48,7 +49,8 @@ describe('generator-style-guider:app - npm w/ install', () => {
       })
       .withPrompts({
         name: 'my-styles',
-        depManager: 'npm'
+        depManager: 'npm',
+        husky: false
       })
       .withOptions({ skipInstall: false })
       .then((dir) => {
