@@ -1,8 +1,14 @@
 'use strict'
-const Generator = require('yeoman-generator')
-const slugify = require('slugify')
+const AppGenerator = require('../app')
 
-module.exports = class extends Generator {
+/**
+ * Yeoman generator for individual components
+ * @type {Class}
+ */
+module.exports = class extends AppGenerator {
+  /**
+   * Yeoman prompting
+   */
   prompting () {
     this.log('Creating a new component for your style-guider!')
     const prompts = [{
@@ -32,122 +38,82 @@ module.exports = class extends Generator {
     }]
 
     return this.prompt(prompts).then(props => {
-      const slug = slugify(props.name).toLowerCase()
-
+      // Get parent project name for later use
       props.projectName = this.options.projectName || this.config.get('name')
       props.longName = props.name
 
-      if (slug !== props.name) {
-        this.log(`Converting name to url friendly format: '${props.name} => '${slug}'`)
-        props.name = slug
-      }
+      // Set name to slug, so it can be used in filenames
+      props.name = this._slugName(props.name)
 
       this.props = props
 
+      // Add to components object in config
       const components = this.config.get('components') || {}
       components[props.name] = props
       this.config.set('components', components)
     })
   }
 
-  default () {
-  }
-
+  /**
+   * Yeoman writing
+   */
   writing () {
-    this.fs.copyTpl(
-      this.templatePath('schema.js'),
-      this.destinationPath('schema/components/' + this.props.name + '.js'),
-      this.props
-    )
+    // Create the schema entry
+    this._template('schema.js', 'schema/components/' + this.props.name + '.js', this.props)
 
     if (this.props.docs) {
-      const hook = '// ------ yeoman include hook ------ //'
-      const path = 'schema/docs.js'
-      const file = this.fs.read(path)
-      const insert = '    \'' + this.props.name + '\': []'
-
-      if (!file || file.indexOf(hook) !== -1) {
-        if (file.indexOf(insert) === -1 && file.indexOf(insert + ',') === -1) {
-          this.fs.write(path, file.replace(hook, hook + '\n' + insert + ','))
-          this.log('Adding to Docs in ' + path)
-        } else {
-          this.log('Duplicate found in ' + path)
-        }
-      } else {
-        this.log('Yeoman include hook missing in ' + path)
-      }
+      // Add to the menu array in the docs schema
+      this._insert(
+        'schema/docs.js',
+        '// ------ yeoman include hook ------ //',
+        '    \'' + this.props.name + '\': [],',
+        true
+      )
     }
 
     if (this.props.mixin) {
-      this.fs.copyTpl(
-        this.templatePath('mixin.pug'),
-        this.destinationPath('pug/components/_' + this.props.name + '.pug'),
-        this.props
+      // Create pug file with mixin
+      this._template('mixin.pug', 'pug/components/_' + this.props.name + '.pug', this.props)
+
+      // Add mixin include to mixins file
+      this._insert(
+        'pug/_mixins.pug',
+        '//------ yeoman hook ------ //',
+        'include components/_' + this.props.name + '.pug'
       )
-
-      const hook = '//------ yeoman hook ------ //'
-      const path = 'pug/_mixins.pug'
-      const file = this.fs.read(path)
-      const insert = 'include components/_' + this.props.name + '.pug'
-
-      if (!file || file.indexOf(hook) !== -1) {
-        if (file.indexOf(insert) === -1) {
-          this.fs.write(path, file.replace(hook, insert + '\n' + hook))
-          this.log('Including in ' + path)
-        } else {
-          this.log('Duplicate found in ' + path)
-        }
-      } else {
-        this.log('Yeoman include hook missing in ' + path)
-      }
     }
 
     if (this.props.js) {
-      this.fs.copyTpl(
-        this.templatePath('script.js'),
-        this.destinationPath('js/components/_' + this.props.name + '.js'),
-        this.props
-      )
+      // Create js file
+      this._template('script.js', 'js/components/_' + this.props.name + '.js', this.props)
     }
 
     if (this.props.scss) {
-      this.fs.copyTpl(
-        this.templatePath('style.scss'),
-        this.destinationPath('scss/components/_' + this.props.name + '.scss'),
-        this.props
+      // Create scss file with mixin
+      this._template('style.scss', 'scss/components/_' + this.props.name + '.scss', this.props)
+
+      // Add to the list of scss file imports
+      this._insert(
+        'scss/' + this.props.projectName + '.scss',
+        '//------ yeoman import hook ------ //',
+        '@import \'components/' + this.props.name + '\';'
       )
 
-      const importHook = '//------ yeoman import hook ------ //'
-      const importInsert = '@import \'components/' + this.props.name + '\';'
-      const appPath = 'scss/' + this.props.projectName + '.scss'
-      const appFile = this.fs.read(appPath)
-
-      const includeHook = '//------ yeoman include hook ------ //'
-      const includeInsert = '@include ' + this.props.projectName + '-' + this.props.name + ';'
-
-      let newAppFile = appFile
-
-      if (!appFile || appFile.indexOf(importHook) !== -1) {
-        if (appFile.indexOf(importInsert) === -1) {
-          newAppFile = newAppFile.replace(importHook, importInsert + '\n' + importHook)
-          this.log('Importing in ' + appPath)
-        } else {
-          this.log('Duplicate found in ' + appPath)
-        }
-      } else {
-        this.log('Yeoman import hook missing in ' + appPath)
-      }
-
-      if (!appFile || appFile.indexOf(includeHook) !== -1) {
-        if (appFile.indexOf(includeInsert) === -1) {
-          newAppFile = newAppFile.replace(includeHook, includeInsert + '\n' + '  ' + includeHook)
-          this.log('including in ' + appPath)
-        }
-      } else {
-        this.log('Yeoman include hook missing in ' + appPath)
-      }
-
-      this.fs.write(appPath, newAppFile)
+      // Add to the list of scss mixins
+      this._insert(
+        'scss/' + this.props.projectName + '.scss',
+        '//------ yeoman include hook ------ //',
+        '@include ' + this.props.projectName + '-' + this.props.name + ';',
+        false,
+        1
+      )
     }
+  }
+
+  /**
+   * Yeoman install step (Avoid inheriting parent method)
+   */
+  install () {
+    return true
   }
 }
