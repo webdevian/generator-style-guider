@@ -19,10 +19,9 @@ var exec = require('child_process').exec
  * Execute sass-lint, error on build, warn on watch
  */
 gulp.task('sass-lint', function (cb) {
-  exec('sass-lint -v', function (err, stdout) {
-    if (stdout) {
-      gutil.log(stdout)
-    }
+  exec('./node_modules/.bin/sass-lint -v', function (err, stdout) {
+    if (err) { gutil.log(err) }
+    if (stdout) { gutil.log(stdout) }
     cb(0)
   })
 })
