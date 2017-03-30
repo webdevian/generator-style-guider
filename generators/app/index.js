@@ -66,6 +66,13 @@ module.exports = class extends Generator {
       this.props
     )
 
+    this.fs.copy(
+      this.destinationPath('package.json.template'),
+      this.destinationPath('package.json')
+    )
+
+    this.fs.delete(this.destinationPath('package.json.template'))
+
     this.fs.copyTpl(
       this.templatePath('docs/**/*'),
       this.destinationPath('docs'),
@@ -115,9 +122,10 @@ module.exports = class extends Generator {
       this.spawnCommandSync('git', ['init', '--quiet'])
     }
     if (this.props.yarn) {
-      this.yarnInstall(null, null, () => {
-        if (!this.options.skipInstall) { this.spawnCommandSync('yarn', ['run', 'build']) }
-      })
+      if (!this.options.skipInstall) {
+        this.spawnCommandSync('yarn', ['install'])
+        this.spawnCommandSync('yarn', ['run', 'build'])
+      }
     } else {
       this.npmInstall(null, null, () => {
         if (!this.options.skipInstall) { this.spawnCommandSync('npm', ['run', '--silent', 'build']) }
