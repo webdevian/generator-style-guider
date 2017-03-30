@@ -30,7 +30,7 @@ gulp.task('sass-lint', function (cb) {
  * Run es-lint against js files, error on build, warn on watch
  */
 gulp.task('js-lint', function () {
-  return gulp.src([ 'js/**/*.js', 'schema/**/*.js', 'gulpfile.js', '!js/vendor/**' ])
+  return gulp.src([ './js/**/*.js', './schema/**/*.js', './gulpfile.js', '!js/vendor/**' ])
   .pipe(standard())
   .pipe(standard.reporter('default', {
     breakOnError: false,
@@ -42,7 +42,7 @@ gulp.task('js-lint', function () {
  * Run pug-lint against pug files, error on build, warn on watch
  */
 gulp.task('pug-lint', function () {
-  return gulp.src([ '**/*.pug' ])
+  return gulp.src([ './**/*.pug' ])
     .pipe(pugLinter())
     .pipe(pugLinter.reporter(null))
 })

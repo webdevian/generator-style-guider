@@ -60,6 +60,6 @@ module.exports = {
   menu: {
     // NB! The below line is required for our yeoman generator and should not be changed.
     // ------ yeoman include hook ------ //
-    example: []
+    'example': []
   }
 }

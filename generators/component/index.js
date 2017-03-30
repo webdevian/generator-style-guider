@@ -33,7 +33,8 @@ module.exports = class extends Generator {
 
     return this.prompt(prompts).then(props => {
       const slug = slugify(props.name).toLowerCase()
-      props.projectName = this.config.get('name')
+
+      props.projectName = this.options.projectName || this.config.get('name')
       props.longName = props.name
 
       if (slug !== props.name) {
@@ -63,11 +64,11 @@ module.exports = class extends Generator {
       const hook = '// ------ yeoman include hook ------ //'
       const path = 'schema/docs.js'
       const file = this.fs.read(path)
-      const insert = '    \'' + this.props.name + '\': [],'
+      const insert = '    \'' + this.props.name + '\': []'
 
-      if (file.indexOf(hook) !== -1) {
-        if (file.indexOf(insert) === -1) {
-          this.fs.write(path, file.replace(hook, hook + '\n' + insert))
+      if (!file || file.indexOf(hook) !== -1) {
+        if (file.indexOf(insert) === -1 && file.indexOf(insert + ',') === -1) {
+          this.fs.write(path, file.replace(hook, hook + '\n' + insert + ','))
           this.log('Adding to Docs in ' + path)
         } else {
           this.log('Duplicate found in ' + path)
@@ -76,6 +77,7 @@ module.exports = class extends Generator {
         this.log('Yeoman include hook missing in ' + path)
       }
     }
+
     if (this.props.mixin) {
       this.fs.copyTpl(
         this.templatePath('mixin.pug'),
@@ -88,7 +90,7 @@ module.exports = class extends Generator {
       const file = this.fs.read(path)
       const insert = 'include components/_' + this.props.name + '.pug'
 
-      if (file.indexOf(hook) !== -1) {
+      if (!file || file.indexOf(hook) !== -1) {
         if (file.indexOf(insert) === -1) {
           this.fs.write(path, file.replace(hook, insert + '\n' + hook))
           this.log('Including in ' + path)
@@ -125,7 +127,7 @@ module.exports = class extends Generator {
 
       let newAppFile = appFile
 
-      if (appFile.indexOf(importHook) !== -1) {
+      if (!appFile || appFile.indexOf(importHook) !== -1) {
         if (appFile.indexOf(importInsert) === -1) {
           newAppFile = newAppFile.replace(importHook, importInsert + '\n' + importHook)
           this.log('Importing in ' + appPath)
@@ -136,7 +138,7 @@ module.exports = class extends Generator {
         this.log('Yeoman import hook missing in ' + appPath)
       }
 
-      if (appFile.indexOf(includeHook) !== -1) {
+      if (!appFile || appFile.indexOf(includeHook) !== -1) {
         if (appFile.indexOf(includeInsert) === -1) {
           newAppFile = newAppFile.replace(includeHook, includeInsert + '\n' + '  ' + includeHook)
           this.log('including in ' + appPath)
