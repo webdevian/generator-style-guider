@@ -1,6 +1,6 @@
 {
   "name": "generator-style-guider",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Generate digital style guides for your organisation or project with a re-usable css and js framework",
   "homepage": "https://github.com/webdevian/generator-style-guider",
   "author": {
