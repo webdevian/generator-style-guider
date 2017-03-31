@@ -45,3 +45,6 @@ yo style-guider:component
 
 There are pre-commit and pre-push hooks for linting, and building the minified files in `dist/`
 <% } %>
+## Incorporating this framework in other projects
+
+This project also acts as a web framework, with re-usable SCSS mixins, pug mixins and front-end javascript that can be included in other projects. Just add it as an npm dependency so it is stored in `node_modules` then the mixin endpoints (or minified dist files) will be available to your project code. 
