@@ -149,6 +149,8 @@ gulp.task('pug', function () {
     data.menuLinks = buildMenu(data.menu, data.components)
   }
 
+  data.components._parameters = fs.readFileSync('./docs/pug/_parameters.pug', 'utf-8')
+
   var pkg = JSON.parse(fs.readFileSync('./package.json'))
   data.version = pkg.version
 
@@ -240,6 +242,7 @@ function extractComponent (component) {
   if (schema.params || schema.mixinPath) {
     try {
       mixin = fs.readFileSync(schema.mixinPath || './pug/components/_' + component + '.pug') + '\n'
+      schema.mixin = mixin
     } catch (e) {
       console.log(e)
     }
