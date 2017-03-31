@@ -2,12 +2,22 @@
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage][coveralls-image]][coveralls-url] [![Code Climate](https://codeclimate.com/github/webdevian/generator-style-guider/badges/gpa.svg)](https://codeclimate.com/github/webdevian/generator-style-guider)
 > Generate a re-usable web framework, with a digital style guide, for your organisation or project
 
+## Demo
+
+View a [demo style guide](https://webdevian.github.io/style-guider-demo/) built with Style Guider, and [its source code](https://github.com/webdevian/style-guider-demo/)
+
 ## Features
 
 * Build a CSS, Javascript and Pug framework to be re-used across multiple projects.
 * Generate a Style Guide / Documentation for your framework, with live interactive previews of each component.
 * Built-in linting
 * Use NPM or Yarn to manage dependencies.
+
+##### Coming soon 
+
+* Bootstrap, Foundation or VanillaCSS options (currently foundation is default)
+* JS framework options
+* HTMl template language options (Pug, Handlebars, EJS etc)
 
 ## Installation
 
