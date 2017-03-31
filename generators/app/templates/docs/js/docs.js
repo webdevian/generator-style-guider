@@ -303,7 +303,7 @@ function writeMixinCall (component, $component) {
  */
 function renderMixin (component, mixinCall) {
   return pug.render(
-    window.components._parameters + '\n' + mixinCall,
+    window.components[component].mixin + '\n' + mixinCall,
     { pretty: '  ' }
   )
 }
