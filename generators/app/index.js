@@ -163,7 +163,7 @@ module.exports = class extends Generator {
     if (!file || file.indexOf(find) !== -1) {
       if (file.indexOf(insert.replace(/,\s*$/, '')) === -1) {
         let replace
-        const spaces = Array(indent).join('  ')
+        const spaces = Array((indent || 0) + 1).join('  ')
 
         if (after) {
           replace = find + '\n' + spaces + insert
