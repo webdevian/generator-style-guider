@@ -1,5 +1,5 @@
 # Style Guider
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage][coveralls-image]][coveralls-url] [![Code Climate](https://codeclimate.com/github/webdevian/generator-style-guider/badges/gpa.svg)](https://codeclimate.com/github/webdevian/generator-style-guider)
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage][coveralls-image]][coveralls-url] [![Code Climate][codeclimate-image]][codeclimate-url]
 > Generate a re-usable web framework, with a digital style guide, for your organisation or project
 
 ## Demo
@@ -53,3 +53,5 @@ MIT © Ian Egner
 [daviddm-url]: https://david-dm.org/webdevian/generator-style-guider
 [coveralls-image]: https://coveralls.io/repos/webdevian/generator-style-guider/badge.svg
 [coveralls-url]: https://coveralls.io/r/webdevian/generator-style-guider
+[codeclimate-image]: https://codeclimate.com/github/webdevian/generator-style-guider/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/webdevian/generator-style-guider
