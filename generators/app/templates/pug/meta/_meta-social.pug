@@ -12,12 +12,12 @@ mixin meta-social(url, title, image, description, siteName)
   if image
     meta(property='og:image', content=image)
   meta(property='og:description', content=description)
-  meta(property='og:site_name', content=siteName || 'APC Overnight')
+  meta(property='og:site_name', content=siteName)
   meta(property='og:locale', content='en_GB')
 
   //- Twitter
   meta(property='twitter:url', content=url)
-  meta(property='twitter:site', content='@APCOvernight')
+  meta(property='twitter:site', content='<ENTER YOUR TWITTER NAME HERE>')
   meta(property='twitter:card', content='summary')
   meta(property='twitter:title', content=title)
   meta(property='twitter:description', content=description)
