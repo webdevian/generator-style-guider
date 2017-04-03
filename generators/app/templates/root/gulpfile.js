@@ -203,14 +203,17 @@ function buildMenu (menu, components) {
  * @return {string}           Mixin string
  */
 function getMixinString (schema, component) {
-  var str = '+' + component + '('
+  let str = '+' + component
 
-  Object.keys(schema.params).forEach(function (key) {
-    str += JSON.stringify(schema.params[key].default) + ', '
-  })
+  if (Object.keys(schema.params).length) {
+    str += '('
 
-  str = str.slice(0, -2) + ')'
+    Object.keys(schema.params).forEach(function (key) {
+      str += JSON.stringify(schema.params[key].default) + ', '
+    })
 
+    str = str.slice(0, -2) + ')'
+  }
   return str
 }
 

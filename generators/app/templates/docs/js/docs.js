@@ -208,14 +208,15 @@ function renderBlock (schema, component, $component) {
  * @return {string}           Mixin string
  */
 function getMixinString (schema, component) {
-  var str = component + '('
+  var str = component
+  if (Object.keys(schema.params).length) {
+    str += '('
+    $.each(schema.params, function (key, val) {
+      str += key + ', '
+    })
 
-  $.each(schema.params, function (key, val) {
-    str += key + ', '
-  })
-
-  str = str.slice(0, -2) + ')'
-
+    str = str.slice(0, -2) + ')'
+  }
   return str
 }
 
@@ -264,21 +265,23 @@ function writeMixinCall (component, $component) {
   var fields = $component.find('form').serializeArray()
   var block = $component.find('[name=blockField]').val()
 
-  var str = '+' + component + '('
+  var str = '+' + component
+  if (fields.length) {
+    str += '('
 
-  $.each(fields, function (index, field) {
-    // If it's boolean or json object/array don't wrap quotes around it
-    if (field.value === 'true' || field.value === 'false' || field.value.match(/^\{|\[/)) {
-      str = str += field.value + ', '
-    } else if (field.value === '' || typeof (field.value) === 'undefined') {
-      str = str += 'null, '
-    } else {
-      str = str += '\'' + field.value + '\', '
-    }
-  })
+    $.each(fields, function (index, field) {
+      // If it's boolean or json object/array don't wrap quotes around it
+      if (field.value === 'true' || field.value === 'false' || field.value.match(/^\{|\[/)) {
+        str = str += field.value + ', '
+      } else if (field.value === '' || typeof (field.value) === 'undefined') {
+        str = str += 'null, '
+      } else {
+        str = str += '\'' + field.value + '\', '
+      }
+    })
 
-  str = str.slice(0, -2) + ')'
-
+    str = str.slice(0, -2) + ')'
+  }
   if (block) {
     // If the block contains tabs we shouldn't escape
     // it, because it might contain another mixin
