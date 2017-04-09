@@ -1,7 +1,7 @@
 # Style Guider
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/webdevian/generator-style-guider.svg)](https://greenkeeper.io/)
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage][coveralls-image]][coveralls-url] [![Code Climate][codeclimate-image]][codeclimate-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage][coveralls-image]][coveralls-url] [![Code Climate][codeclimate-image]][codeclimate-url] [![Greenkeeper badge](https://badges.greenkeeper.io/webdevian/generator-style-guider.svg)](https://greenkeeper.io/)
+
 > Generate a re-usable web framework, with a digital style guide, for your organisation or project
 
 ## Demo
