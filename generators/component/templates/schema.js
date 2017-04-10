@@ -25,16 +25,16 @@ module.exports = {
 
   // Does this component break out of the content wrapper in the docs
   // If so, the generator with wrap a .breakout div around the demo
-  breakout: false,
-  <% } %>
+  breakout: false,<% } %>
+
   <% if (scss) { %>// Path to scss (if not scss/components/<component_name>.scss)
   // Set to false if there is no scss for this component
-  // scssPath: null,
-  <% } %>
+  // scssPath: null,<% } %>
+
   <% if (js) { %>// Path to js (if not js/components/<component_name>.js)
   // Set to false if there is no js for this component
-  // jsPath: null,
-  <% } %>
+  // jsPath: null,<% } %>
+
   <% if (mixin) { %>// Path to mixin (if not pug/components/<component_name>.pug)
   // Set to false if there is no mixin for this component
   // mixinPath: null,
