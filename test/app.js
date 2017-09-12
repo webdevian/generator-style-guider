@@ -42,8 +42,8 @@ describe('generator-style-guider:app - yarn', () => {
 })
 
 describe('generator-style-guider:app - npm w/ install', () => {
-  before(() => {
-    return helpers.run(path.join(__dirname, '../generators/app'))
+  before((done) => {
+    helpers.run(path.join(__dirname, '../generators/app'))
       .inTmpDir(dir => {
         fs.writeFileSync(path.join(dir, '.npmrc'), 'loglevel=warn\nprogress=false')
       })
@@ -61,6 +61,7 @@ describe('generator-style-guider:app - npm w/ install', () => {
             assert(false)
           }
           assert(true)
+          done()
         })
       })
   })
