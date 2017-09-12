@@ -105,7 +105,7 @@ module.exports = class extends Generator {
       }
     } else {
       this.npmInstall(null, null, () => {
-        if (!this.options.skipInstall) { this.spawnCommandSync('npm', ['run', '--silent', 'build']) }
+        if (!this.options.skipInstall) { this.spawnCommandSync('npm', ['run', 'build']) }
       })
     }
   }
