@@ -54,7 +54,7 @@ describe('generator-style-guider:app - npm w/ install', () => {
       })
       .withOptions({ skipInstall: false })
       .then((dir) => {
-        return exec('npm run lint', {}, function (error, stdout, stderr) {
+        return exec('npm run lint', function (error, stdout, stderr) {
           console.log(stdout)
           if (error) {
             console.log(stderr)

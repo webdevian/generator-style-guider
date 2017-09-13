@@ -104,10 +104,8 @@ module.exports = class extends Generator {
         this.spawnCommandSync('yarn', ['run', 'build'])
       }
     } else {
-      this.npmInstall().then(() => {
-        if (!this.options.skipInstall) {
-          return this.spawnCommand('npm', ['run', '--silent', 'build'])
-        }
+      this.npmInstall(null, null, () => {
+        if (!this.options.skipInstall) { this.spawnCommandSync('npm', ['run', '--silent', 'build']) }
       })
     }
   }
