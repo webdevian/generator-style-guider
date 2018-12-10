@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "fs-extra": "^6.0.0",
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.0",
     "gulp-coveralls": "^0.1.0",
     "gulp-exclude-gitignore": "^1.0.0",
     "gulp-istanbul": "^1.0.0",
