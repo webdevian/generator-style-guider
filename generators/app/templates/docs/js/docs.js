@@ -265,10 +265,9 @@ function writeMixinCall (component, $component) {
   var fields = $component.find('form').serializeArray()
   var block = $component.find('[name=blockField]').val()
 
-  var str = '+' + component
+  var str = '+' + component + '('
   if (fields.length) {
-    str += '('
-
+    
     $.each(fields, function (index, field) {
       // If it's boolean or json object/array don't wrap quotes around it
       if (field.value === 'true' || field.value === 'false' || field.value.match(/^\{|\[/)) {
@@ -280,7 +279,7 @@ function writeMixinCall (component, $component) {
       }
     })
 
-    str = str.slice(0, -2) + ')'
+    str = str.replace(/,\s*$/, '') + ')'
   }
   if (block) {
     // If the block contains tabs we shouldn't escape
