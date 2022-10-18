@@ -23,7 +23,7 @@
   "dependencies": {
     "path": "^0.12.7",
     "slugify": "^1.1.0",
-    "yeoman-generator": "^2.0.0"
+    "yeoman-generator": "^5.0.0"
   },
   "devDependencies": {
     "fs-extra": "^6.0.0",
